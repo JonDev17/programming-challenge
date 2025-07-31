@@ -2,6 +2,11 @@ package de.exxcellent.challenge.model;
 
 import java.util.Comparator;
 
+/**
+ * This class offers a partial view on provided weather data in order to solve the weatherdata challenge.
+ *
+ * @author Jonas Mayer
+ */
 public class WeatherRecord {
 
     Integer day;
