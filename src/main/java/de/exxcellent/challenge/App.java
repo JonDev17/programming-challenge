@@ -1,5 +1,10 @@
 package de.exxcellent.challenge;
 
+import de.exxcellent.challenge.factories.DataSetFactory;
+import de.exxcellent.challenge.io.CSVIO;
+import de.exxcellent.challenge.model.DataSet;
+import de.exxcellent.challenge.model.WeatherRecord;
+
 /**
  * The entry class for your solution. This class is only aimed as starting point and not intended as baseline for your software
  * design. Read: create your own classes and packages as appropriate.
@@ -14,9 +19,9 @@ public final class App {
      */
     public static void main(String... args) {
 
-        // Your preparation code …
+        DataSet<WeatherRecord> weatherData = DataSetFactory.createWeatherDataSet(CSVIO.retrieveRawData("de/exxcellent/challenge/weather.csv"));
 
-        String dayWithSmallestTempSpread = "Someday";     // Your day analysis function call …
+        String dayWithSmallestTempSpread = "" + weatherData.getSmallestBy(WeatherRecord.spreadComparator()).getDay();
         System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
 
         String teamWithSmallestGoalSpread = "A good team"; // Your goal analysis function call …

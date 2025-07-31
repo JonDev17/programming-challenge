@@ -1,9 +1,11 @@
 package de.exxcellent.challenge.io;
 
 import com.opencsv.*;
+import com.opencsv.exceptions.CsvException;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
