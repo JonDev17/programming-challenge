@@ -8,9 +8,9 @@ import java.util.Comparator;
  * @author Jonas Mayer
  */
 public class WeatherRecord {
-    Integer day;
-    Integer mxt;
-    Integer mnt;
+    private Integer day;
+    private Integer mxt;
+    private Integer mnt;
 
     public WeatherRecord(Integer day, Integer mxt, Integer mnt){
         this.day = day;

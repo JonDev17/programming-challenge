@@ -1,6 +1,7 @@
 package de.exxcellent.challenge.factories;
 
 import de.exxcellent.challenge.model.DataSet;
+import de.exxcellent.challenge.model.FootballRecord;
 import de.exxcellent.challenge.model.WeatherRecord;
 
 import java.util.ArrayList;
@@ -23,6 +24,27 @@ public class DataSetFactory {
             currentMnT = Integer.valueOf(rawData.get(i)[ds.findIndexByLabel("MnT")]);
 
             data.add(new WeatherRecord(currentDay, currentMxT, currentMnT));
+        }
+
+        ds.setData(data);
+        return ds;
+    }
+
+    public static DataSet<FootballRecord> createFootballDataSet(List<String[]> rawData){
+        DataSet<FootballRecord> ds = new DataSet<>(rawData.get(0),null);
+
+        List<FootballRecord> data = new ArrayList<>();
+
+        String currentTeam;
+        Integer currentGoals;
+        Integer currentGoalsAllowed;
+
+        for(int i = 1; i < rawData.size(); i++){
+            currentTeam = rawData.get(i)[ds.findIndexByLabel("Team")];
+            currentGoals = Integer.valueOf(rawData.get(i)[ds.findIndexByLabel("Goals")]);
+            currentGoalsAllowed = Integer.valueOf(rawData.get(i)[ds.findIndexByLabel("Goals Allowed")]);
+
+            data.add(new FootballRecord(currentTeam, currentGoals, currentGoalsAllowed));
         }
 
         ds.setData(data);

@@ -3,6 +3,7 @@ package de.exxcellent.challenge;
 import de.exxcellent.challenge.factories.DataSetFactory;
 import de.exxcellent.challenge.io.CSVIO;
 import de.exxcellent.challenge.model.DataSet;
+import de.exxcellent.challenge.model.FootballRecord;
 import de.exxcellent.challenge.model.WeatherRecord;
 
 /**
@@ -20,11 +21,12 @@ public final class App {
     public static void main(String... args) {
 
         DataSet<WeatherRecord> weatherData = DataSetFactory.createWeatherDataSet(CSVIO.retrieveRawData("de/exxcellent/challenge/weather.csv"));
+        DataSet<FootballRecord> footballData = DataSetFactory.createFootballDataSet(CSVIO.retrieveRawData("de/exxcellent/challenge/football.csv"));
 
         String dayWithSmallestTempSpread = "" + weatherData.getSmallestBy(WeatherRecord.spreadComparator()).getDay();
         System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
 
-        String teamWithSmallestGoalSpread = "A good team"; // Your goal analysis function call …
+        String teamWithSmallestGoalSpread = footballData.getSmallestBy(FootballRecord.spreadComparator()).getTeam();
         System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
     }
 }
