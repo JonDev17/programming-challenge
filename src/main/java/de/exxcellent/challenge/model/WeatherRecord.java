@@ -8,7 +8,6 @@ import java.util.Comparator;
  * @author Jonas Mayer
  */
 public class WeatherRecord {
-
     Integer day;
     Integer mxt;
     Integer mnt;

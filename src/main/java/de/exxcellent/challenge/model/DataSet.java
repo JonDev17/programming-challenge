@@ -25,6 +25,14 @@ public class DataSet<K> {
         }
     }
 
+    public List<K> getData(){
+        return data;
+    }
+
+    public void setData(List<K> data) {
+        this.data = data;
+    }
+
     /**
      * This method finds the smallest data record by a specified metric passed as a Comparator<K> instance.
      * Returns null if no such element exists, which only happens if the data set is empty.
@@ -35,6 +43,20 @@ public class DataSet<K> {
      */
     public K getSmallestBy(Comparator<K> comparisonFunction){
         return data.stream().min(comparisonFunction).orElse(null);
+    }
+
+    public int findIndexByLabel(String label){
+        if(labels == null){
+            return -1;
+        }
+
+        for(int i = 0; i <  labels.length; i++){
+            if(label.equals(labels[i])){
+                return i;
+            }
+        }
+
+        return -1;
     }
 
 }
