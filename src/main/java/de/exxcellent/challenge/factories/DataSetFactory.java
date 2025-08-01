@@ -9,6 +9,13 @@ import java.util.List;
 
 public class DataSetFactory {
 
+    /**
+     * Create a dataset consisting of WeatherRecord objects.
+     *
+     * @param rawData List of data to transform into WeatherRecords, including a header
+     * @return A DataSet containing WeatherRecords
+     * @author Jonas Mayer
+     */
     public static DataSet<WeatherRecord> createWeatherDataSet(List<String[]> rawData){
         DataSet<WeatherRecord> ds = new DataSet<>(rawData.get(0),null);
 
@@ -30,6 +37,13 @@ public class DataSetFactory {
         return ds;
     }
 
+    /**
+     * Create a dataset consisting of FootballRecord objects.
+     *
+     * @param rawData List of data to transform into FootballRecords, including a header
+     * @return A DataSet containing FootballRecords
+     * @author Jonas Mayer
+     */
     public static DataSet<FootballRecord> createFootballDataSet(List<String[]> rawData){
         DataSet<FootballRecord> ds = new DataSet<>(rawData.get(0),null);
 

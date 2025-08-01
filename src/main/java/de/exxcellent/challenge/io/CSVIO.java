@@ -1,16 +1,21 @@
 package de.exxcellent.challenge.io;
 
 import com.opencsv.*;
-import com.opencsv.exceptions.CsvException;
 
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
 public class CSVIO {
 
+    /**
+     * Retrieve lines from a CSV-file.
+     *
+     * @param file Filepath of the file to read.
+     * @return CSV data as a list if existing, else null.
+     * @author Jonas Mayer
+     */
     public static List<String[]> retrieveRawData(String file){
         List<String[]> records = null;
 
