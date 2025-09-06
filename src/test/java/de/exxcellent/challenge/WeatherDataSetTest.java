@@ -20,13 +20,13 @@ public class WeatherDataSetTest {
         DataSet<WeatherRecord> ds = new DataSet<>(labels,list);
 
         assertEquals(2, ds.findIndexByLabel("MnT"), "MnT supposed to be the 2nd label!");
-        assertEquals(1,ds.getSmallestBy(WeatherRecord.spreadComparator()).getDay(),"Day 1 supposed to have smallest spread!");
+        assertEquals(1,ds.getSmallestBy(WeatherRecord.spreadComparator()).get().getDay(),"Day 1 supposed to have smallest spread!");
     }
 
     @Test
     void emptySetTest(){
         DataSet<WeatherRecord> ds = new DataSet<>(null,null);
-        assertNull(ds.getSmallestBy(WeatherRecord.spreadComparator()));
+        assertTrue(ds.getSmallestBy(WeatherRecord.spreadComparator()).isEmpty());
     }
 
     @Test

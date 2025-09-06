@@ -3,6 +3,7 @@ package de.exxcellent.challenge.model;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 public class DataSet<K> {
 
@@ -35,14 +36,14 @@ public class DataSet<K> {
 
     /**
      * This method finds the smallest data record by a specified metric passed as a Comparator<K> instance.
-     * Returns null if no such element exists, which only happens if the data set is empty.
+     * Returns an empty Optional wrapper if no such element exists, which only happens if the data set is empty.
      *
      * @param comparisonFunction A comparator that allows to view the data set in an ordered way.
-     * @return An element of type K that can be considered the smallest by a given comparator. Null if no such element exists.
+     * @return An element of type K that can be considered the smallest by a given comparator. An empty Optional wrapper if no such element exists.
      * @author Jonas Mayer
      */
-    public K getSmallestBy(Comparator<K> comparisonFunction){
-        return data.stream().min(comparisonFunction).orElse(null);
+    public Optional<K> getSmallestBy(Comparator<K> comparisonFunction){
+        return data.stream().min(comparisonFunction);
     }
 
     public int findIndexByLabel(String label){

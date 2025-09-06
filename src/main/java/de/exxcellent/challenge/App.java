@@ -6,6 +6,8 @@ import de.exxcellent.challenge.model.DataSet;
 import de.exxcellent.challenge.model.FootballRecord;
 import de.exxcellent.challenge.model.WeatherRecord;
 
+import java.util.Optional;
+
 /**
  * The entry class for your solution. This class is only aimed as starting point and not intended as baseline for your software
  * design. Read: create your own classes and packages as appropriate.
@@ -23,10 +25,18 @@ public final class App {
         DataSet<WeatherRecord> weatherData = DataSetFactory.createWeatherDataSet(CSVIO.retrieveRawData("de/exxcellent/challenge/weather.csv"));
         DataSet<FootballRecord> footballData = DataSetFactory.createFootballDataSet(CSVIO.retrieveRawData("de/exxcellent/challenge/football.csv"));
 
-        String dayWithSmallestTempSpread = "" + weatherData.getSmallestBy(WeatherRecord.spreadComparator()).getDay();
+        Optional<WeatherRecord> minSpreadWRec = weatherData.getSmallestBy(WeatherRecord.spreadComparator());
+        String dayWithSmallestTempSpread = "No such element";
+        if(minSpreadWRec.isPresent()){
+            dayWithSmallestTempSpread = "" + minSpreadWRec.get().getDay();
+        }
         System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
 
-        String teamWithSmallestGoalSpread = footballData.getSmallestBy(FootballRecord.spreadComparator()).getTeam();
+        Optional<FootballRecord> minSpreadFRec = footballData.getSmallestBy(FootballRecord.spreadComparator());
+        String teamWithSmallestGoalSpread = "No such element";
+        if(minSpreadFRec.isPresent()){
+            teamWithSmallestGoalSpread = footballData.getSmallestBy(FootballRecord.spreadComparator()).get().getTeam();
+        }
         System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
     }
 }

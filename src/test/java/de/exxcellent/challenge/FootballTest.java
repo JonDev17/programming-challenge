@@ -17,7 +17,7 @@ public class FootballTest {
                         new FootballRecord("HSV",10, 12),
                         new FootballRecord("FCB", 23, 10)));
 
-        String smallestSpreadTeam = ds.getSmallestBy(FootballRecord.spreadComparator()).getTeam();
+        String smallestSpreadTeam = ds.getSmallestBy(FootballRecord.spreadComparator()).get().getTeam();
 
         assertEquals("HSV", smallestSpreadTeam, "HSV supposed to have smallest spread!");
     }
