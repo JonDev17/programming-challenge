@@ -1,6 +1,6 @@
 package de.exxcellent.challenge;
 
-import de.exxcellent.challenge.factories.DataSetFactory;
+import de.exxcellent.challenge.factories.WeatherSetFactory;
 import de.exxcellent.challenge.model.DataSet;
 import de.exxcellent.challenge.model.WeatherRecord;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ public class WeatherDataSetTest {
     void factoryTest(){
         List<String[]> rawData = List.of(labels, new String[]{"0", "10", "0"}, new String[]{"1", "15", "10"}, new String[]{"2", "25", "10"});
 
-        DataSet<WeatherRecord> ds = DataSetFactory.createWeatherDataSet(rawData);
+        DataSet<WeatherRecord> ds = WeatherSetFactory.createWeatherDataSet(rawData);
 
         assertEquals(3, ds.getData().size(), "Data set supposed to have 3 entries!");
         assertEquals(1, ds.getData().get(1).getDay(), "Day mismatch!");
