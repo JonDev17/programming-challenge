@@ -1,5 +1,6 @@
 package de.exxcellent.challenge;
 
+import de.exxcellent.challenge.exceptions.FaultyData;
 import de.exxcellent.challenge.factories.FootballSetFactory;
 import de.exxcellent.challenge.factories.WeatherSetFactory;
 import de.exxcellent.challenge.io.CSVIO;
@@ -23,21 +24,30 @@ public final class App {
      */
     public static void main(String... args) {
 
-        DataSet<WeatherRecord> weatherData = WeatherSetFactory.createWeatherDataSet(CSVIO.retrieveRawData("de/exxcellent/challenge/weather.csv"));
-        DataSet<FootballRecord> footballData = FootballSetFactory.createFootballDataSet(CSVIO.retrieveRawData("de/exxcellent/challenge/football.csv"));
+        try{
+            DataSet<WeatherRecord> weatherData = WeatherSetFactory.createWeatherDataSet(CSVIO.retrieveRawData("de/exxcellent/challenge/weather.csv"));
 
-        Optional<WeatherRecord> minSpreadWRec = weatherData.getSmallestBy(WeatherRecord.spreadComparator());
-        String dayWithSmallestTempSpread = "No such element";
-        if(minSpreadWRec.isPresent()){
-            dayWithSmallestTempSpread = "" + minSpreadWRec.get().getDay();
+            Optional<WeatherRecord> minSpreadWRec = weatherData.getSmallestBy(WeatherRecord.spreadComparator());
+            String dayWithSmallestTempSpread = "No such element";
+            if(minSpreadWRec.isPresent()){
+                dayWithSmallestTempSpread = "" + minSpreadWRec.get().getDay();
+            }
+            System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
+        } catch(FaultyData fde){
+            fde.printStackTrace();
         }
-        System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
 
-        Optional<FootballRecord> minSpreadFRec = footballData.getSmallestBy(FootballRecord.spreadComparator());
-        String teamWithSmallestGoalSpread = "No such element";
-        if(minSpreadFRec.isPresent()){
-            teamWithSmallestGoalSpread = footballData.getSmallestBy(FootballRecord.spreadComparator()).get().getTeam();
+        try{
+            DataSet<FootballRecord> footballData = FootballSetFactory.createFootballDataSet(CSVIO.retrieveRawData("de/exxcellent/challenge/football.csv"));
+
+            Optional<FootballRecord> minSpreadFRec = footballData.getSmallestBy(FootballRecord.spreadComparator());
+            String teamWithSmallestGoalSpread = "No such element";
+            if(minSpreadFRec.isPresent()){
+                teamWithSmallestGoalSpread = footballData.getSmallestBy(FootballRecord.spreadComparator()).get().getTeam();
+            }
+            System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
+        } catch (FaultyData fde) {
+            fde.printStackTrace();
         }
-        System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
     }
 }

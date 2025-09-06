@@ -46,13 +46,13 @@ public class DataSet<K> {
         return data.stream().min(comparisonFunction);
     }
 
-    public int findIndexByLabel(String label){
-        if(labels == null){
+    public static int findIndexByLabel(String[] header, String label){
+        if(header == null){
             return -1;
         }
 
-        for(int i = 0; i <  labels.length; i++){
-            if(label.equals(labels[i])){
+        for(int i = 0; i <  header.length; i++){
+            if(label.equals(header[i])){
                 return i;
             }
         }
